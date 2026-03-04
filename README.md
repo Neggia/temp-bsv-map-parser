@@ -17,4 +17,5 @@ npm run dev
 # Or compile and run
 
 npx tsc
+
 node dist/index.js
