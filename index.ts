@@ -1,6 +1,6 @@
 import { parse } from "bpu-ts";
-import { TransformTx } from "bmapjs/src/bmap";
-import type { BmapTx, BobTx, MAP } from "bmapjs/src/types/common";
+import { TransformTx } from "bmapjs";
+import type { BmapTx, BobTx, MAP } from "bmapjs";
 
 // Your raw transaction hex here. this one is taken from https://whatsonchain.com/tx/28a22d135c27605300006235baacea727c9c0dedb7500160a87d59e0d4e0bf60
 const TX_HEX =
