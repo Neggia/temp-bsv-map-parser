@@ -1,6 +1,6 @@
 # temp-bsv-map-parser
 
-Demo project to test Map parser library agains known transactions with MAP messages
+Demo project to test MAP parser library against known legit transactions with MAP messages
 
 # Install dependencies
 
