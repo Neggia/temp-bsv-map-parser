@@ -2,6 +2,7 @@ import { parse } from "bpu-ts";
 // import { TransformTx } from 'bmapjs'
 import bmapjs from "bmapjs";
 import type { BmapTx, BobTx, MAP } from "bmapjs";
+import { byteString2Int, toByteString } from "scrypt-ts";
 
 const { allProtocols, TransformTx } = bmapjs;
 
@@ -65,11 +66,27 @@ async function extractMAPData(txHex: string): Promise<MAP[] | null> {
     }
 
     console.log(`✅ Found ${bmapTx.MAP.length} MAP output(s)`);
+    const amount = toByteString(bmapTx.MAP[0].amount, true);
+    console.log("amount: ", byteString2Int(amount)); // 2n is correct
+    const bsvUsdPrice = toByteString(bmapTx.MAP[0].bsvUsdPrice, true);
+    console.log("bsvUsdPrice: ", byteString2Int(bsvUsdPrice));
+    const xauUsdPrice = toByteString(bmapTx.MAP[0].xauUsdPrice, true);
+    console.log("xauUsdPrice: ", byteString2Int(xauUsdPrice));
+    const xauUsdPriceLE = toLittleEndian(xauUsdPrice);
+    console.log("xauUsdPriceLE: ", byteString2Int(xauUsdPriceLE)); // LE should not be needed
+    const timestampFrom = toByteString(bmapTx.MAP[0].timestampFrom, true);
+    console.log("timestampFrom: ", byteString2Int(timestampFrom));
+    const timestampTo = toByteString(bmapTx.MAP[0].timestampTo, true);
+    console.log("timestampTo: ", byteString2Int(timestampTo));
     return bmapTx.MAP;
   } catch (error) {
     console.error("❌ Error extracting MAP data:", error);
     return null;
   }
+}
+
+function toLittleEndian(hex: string): string {
+  return Buffer.from(hex, "hex").reverse().toString("hex");
 }
 
 /**
